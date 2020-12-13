@@ -14,13 +14,11 @@ df = pd.read_csv(filename)
 # plot(df2)
 
 
-signature_matrix = build_signature_matrix(df, 10, 3)
+signature_matrix = build_signature_matrix(df, 10, 3, True)
 
 # https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134
-b = 5
-r = 2
 
-bands = []
+
 
 def transpose(m):
     """
@@ -59,13 +57,32 @@ def LSH_sig_matrix(signature_matrix, threshhold):
 
 
 
-def use_bands(trans_matrix):
-
-    for signature in trans_matrix:
-        s = np.array_split(signature, b)
+def use_bands(signature_matrix, nr_bands):
+    bands = []
+    signature_matrix = transpose(signature_matrix)
+    for signature in signature_matrix:
+        s = np.array_split(signature, nr_bands)
         bands.append(s)
 
+    possible_plags = []
+
+    for i in range(len(bands)):
+        for j in range(i + 1, len(bands), 1):
+
+            for k in range(len(bands[i])):
+                if list(bands[i][k]) == list(bands[j][k]):
+                    possible_plags.append((i,j))
+                    break
+    return possible_plags
+
+
+
+band_val = use_bands(signature_matrix,5)
+print(band_val)
 val = LSH_sig_matrix(signature_matrix,0.8)
+print(val[1])
+
+
 
 print("oke")
 
