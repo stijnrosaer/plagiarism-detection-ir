@@ -29,9 +29,10 @@ def permutation(df, mask, gram_size):
 
 def build_signature_matrix(df, iterations, gram_size, debug = False):
     m = []
+    if debug:
+        random.seed(1)
     for i in range(iterations):
-        if debug:
-            random.seed(i)
+
         mask = random.getrandbits(32)
         res = permutation(df, mask, gram_size)
         m.append(res)
