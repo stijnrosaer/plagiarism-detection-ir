@@ -21,7 +21,9 @@ b = 5
 r = 2
 
 bands = []
-for signature in signature_matrix:
+m = signature_matrix
+trans = [[m[j][i][1] for j in range(len(m))] for i in range(len(m[0]))]
+for signature in trans:
     s = np.array_split(signature, b)
     bands.append(s)
 
