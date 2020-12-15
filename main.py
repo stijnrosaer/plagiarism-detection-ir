@@ -38,7 +38,7 @@ def calc_signature_similarity(sig1, sig2):
         if sig1[i]==sig2[i]:
             val+=1
 
-    return val/len(sig1)
+    return val/float(len(sig1))
 
 
 def LSH_sig_matrix(signature_matrix, threshhold):
@@ -76,7 +76,30 @@ def use_bands(signature_matrix, nr_bands):
     return possible_plags
 
 
+def get_number_of_bands(thershold, nr_iters):
+    diff = float("inf")
+    val = -1
+    for b in range(1,nr_iters):
+        if nr_iters% b == 0:
+            r = nr_iters/b
+            t = pow(1/b, 1/r)
+            if abs(thershold -t)< diff and t < thershold:
+                diff = abs(thershold -t)
+                val = (t,b,r)
 
+    return val
+
+
+
+def debug_nr_bandz(b, r):
+    for i in range(10):
+        s =i*0.1
+        t =1-pow(1-pow(s,r),b)
+        print("prob "+ str(s) + ": " + str(t))
+# val = get_number_of_bands(0.75,2000)
+# print(val)
+# debug_nr_bandz(val[1],val[2])
+# #
 band_val = use_bands(signature_matrix,5)
 print(band_val)
 val = LSH_sig_matrix(signature_matrix,0.8)

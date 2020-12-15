@@ -33,7 +33,7 @@ def build_signature_matrix(df, iterations, gram_size, debug = False):
         random.seed(1)
     for i in range(iterations):
 
-        mask = random.getrandbits(32)
+        mask = random.getrandbits(64)
         res = permutation(df, mask, gram_size)
         m.append(res)
 
