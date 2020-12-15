@@ -10,11 +10,11 @@ from jaccard import plot, jaccard_df
 filename = "preprocess-news_articles_small.csv"
 df = pd.read_csv(filename)
 
-df2 = jaccard_df(df, filename)
-plot(df2)
+# df2 = jaccard_df(df, filename)
+# plot(df2)
 
 
-signature_matrix = build_signature_matrix(df, 100, 3, True)
+signature_matrix = build_signature_matrix(df, 16, 3, True)
 
 # https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134
 
@@ -76,14 +76,14 @@ def use_bands(signature_matrix, nr_bands):
     return possible_plags
 
 
-def get_number_of_bands(thershold, nr_iters):
+def get_number_of_bands(thershold, nr_iters, thresh_maximum = 1.0):
     diff = float("inf")
     val = -1
-    for b in range(1,nr_iters):
-        if nr_iters% b == 0:
+    for b in range(1,nr_iters+1):
+        if nr_iters% b == 0 or b == 1:
             r = nr_iters/b
             t = pow(1/b, 1/r)
-            if abs(thershold -t)< diff and t < thershold:
+            if abs(thershold -t)< diff and (t <= thresh_maximum):
                 diff = abs(thershold -t)
                 val = (t,b,r)
 
@@ -96,7 +96,7 @@ def debug_nr_bandz(b, r):
         s =i*0.1
         t =1-pow(1-pow(s,r),b)
         print("prob "+ str(s) + ": " + str(t))
-nr_bandz = get_number_of_bands(0.8,100)
+nr_bandz = get_number_of_bands(0.8,16)
 print(nr_bandz)
 # debug_nr_bandz(nr_bandz[1],nr_bandz[2])
 # #
