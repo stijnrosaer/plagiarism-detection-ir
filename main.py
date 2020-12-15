@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 from signatureMatrix import build_signature_matrix
 from jaccard import plot, jaccard_df
 
-filename = "news_articles_small.csv"
+filename = "preprocess-news_articles_small.csv"
 df = pd.read_csv(filename)
 
-# df2 = jaccard_df(df, filename)
-# plot(df2)
+df2 = jaccard_df(df, filename)
+plot(df2)
 
 
-signature_matrix = build_signature_matrix(df, 10, 3, True)
+signature_matrix = build_signature_matrix(df, 100, 3, True)
 
 # https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134
 
@@ -96,11 +96,11 @@ def debug_nr_bandz(b, r):
         s =i*0.1
         t =1-pow(1-pow(s,r),b)
         print("prob "+ str(s) + ": " + str(t))
-# val = get_number_of_bands(0.75,2000)
-# print(val)
-# debug_nr_bandz(val[1],val[2])
+nr_bandz = get_number_of_bands(0.8,100)
+print(nr_bandz)
+# debug_nr_bandz(nr_bandz[1],nr_bandz[2])
 # #
-band_val = use_bands(signature_matrix,5)
+band_val = use_bands(signature_matrix,nr_bandz[1])
 print(band_val)
 val = LSH_sig_matrix(signature_matrix,0.8)
 print(val[1])
