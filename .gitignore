@@ -1,3 +1,9 @@
 .vscode
 .idea
 __pycache__
+
+# csv files
+news_*.csv
+preprocess-*.csv
+jaccard-*.csv
+
