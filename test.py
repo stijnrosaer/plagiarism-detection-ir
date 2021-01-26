@@ -3,8 +3,9 @@ import unittest
 from LSH import *
 from jaccard import *
 
+
 class TestJaccard(unittest.TestCase):
-    
+
     def test_simple_score(self):
         doc1 = ["the", "great", "wall"]
         doc2 = ["the", "bad", "wall"]
@@ -23,10 +24,11 @@ class TestJaccard(unittest.TestCase):
         score = jaccard_index(doc1, doc2)
         self.assertEqual(score, 1)
 
-     # TODO test with small file?
+    # TODO test with small file?
+
 
 class TestIdealIterRowsBands(unittest.TestCase):
-    
+
     def test_one_band(self):
         iter, bands, rows = get_ideal_bands(0.7, 0.9, 0.75, 0.80, 1, 1)
         self.assertEqual(iter, 1)
