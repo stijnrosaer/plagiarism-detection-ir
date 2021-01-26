@@ -1,3 +1,4 @@
+# the configurative values used in the project
 Config = {
     "DEBUG": True,
 
