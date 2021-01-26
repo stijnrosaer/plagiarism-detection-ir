@@ -8,13 +8,23 @@ import inflect
 
 def preprocess(df, filename):
     import re
+    print("Converting to lower case")
     df["article"] = df["article"].str.lower()  # to lower case
 
+    print("Removing special characters")
     df['article'] = df['article'].map(
         lambda x: re.sub(r'[,!.;+-@!%^&*)(_\\\'\"“”’—]', '', str(x)))  # remove special characters
-    df['article'] = df['article'].map(lambda x: re.sub(r'\W+', ' ', str(x)))  # remove exess white spaces
+
+    print("Removing excess white space")
+    df['article'] = df['article'].map(lambda x: re.sub(r'\W+', ' ', str(x)))  # remove excess white spaces
+
+    print("Removing single letters")
     df['article'] = df['article'].map(
         lambda x: re.sub('(\\b[A-Za-z] \\b|\\b [A-Za-z]\\b)', '', str(x)))  # remove single letters
+
+    print("Removing numbers")
+    df['article'] = df['article'].map(
+        lambda x: re.sub('([1-9])', '', str(x)))  # remove numbers
 
     # p = inflect.engine()
     #
@@ -25,6 +35,8 @@ def preprocess(df, filename):
     #     return sing
     #
     # df['article'] = df['article'].map(lambda x: ' '.join([to_singular(word) for word in x.split()]))
+
+    print("Stemming")
     import nltk
     from nltk.stem import PorterStemmer, WordNetLemmatizer
     nltk.download('wordnet')
@@ -34,7 +46,7 @@ def preprocess(df, filename):
     df['article'] = df['article'].map(lambda x: ' '.join([lemma.lemmatize(word) for word in x.split()]))
 
 
-
+    print("Removing stopwords")
     nltk.download('stopwords')
     from nltk.corpus import stopwords
     stop = stopwords.words("english")
