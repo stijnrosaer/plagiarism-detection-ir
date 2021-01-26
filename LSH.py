@@ -54,7 +54,7 @@ def LSH_sig_matrix(signature_matrix: list, threshhold: float):
             # Append to list(s)
             fulval = ((i, j), similarity)
             fullist.append(fulval)
-            if similarity > threshhold:
+            if similarity >= threshhold:
                 exceed_list.append(fulval)
 
     return (fullist, exceed_list)
