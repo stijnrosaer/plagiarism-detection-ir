@@ -5,6 +5,7 @@ from jaccard import *
 
 
 class TestJaccard(unittest.TestCase):
+    # Tests our jaccord scoring method
 
     def test_simple_score(self):
         doc1 = ["the", "great", "wall"]
@@ -35,7 +36,21 @@ class TestIdealIterRowsBands(unittest.TestCase):
         self.assertEqual(bands, 1)
         self.assertEqual(rows, 1)
 
+    def test_find_correct_bands(self):
+        iter, bands, rows = get_ideal_bands(0.5, 0.8, 0.470, 0.99, 100, 100)
+        self.assertEqual(iter, 100)
+        self.assertEqual(bands, 20)
+        self.assertEqual(rows, 5)
+
+    def test_find_correct_iter_and_bands(self):
+        iter, bands, rows = get_ideal_bands(0.5, 0.8, 0.470, 0.99, 60, 200)
+        self.assertEqual(iter, 100)
+        self.assertEqual(bands, 20)
+        self.assertEqual(rows, 5)
+
+
     def test_cursus_values(self):
+        # test the probability calculations used by get_ideal_bands
         bands = 20
         rows = 5
         self.assertAlmostEqual(calc_prob_sim(0.2, bands, rows), 0.006, 3)
