@@ -148,7 +148,7 @@ def get_ideal_bands(d1: float, d2: float, p1: float, p2: float, eps=0.01, printi
 
     # Loop over all possible amounts of iterations, this allows us to select a broader range of
     # bands and rows
-    for nr_iters in range(min_iterations, max_iterations):
+    for nr_iters in range(min_iterations, max_iterations+1):
         # check all possible bands
         for bands in range(1, nr_iters+1):
             # filter bands that cannot divide perfectly

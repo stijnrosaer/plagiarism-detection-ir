@@ -9,7 +9,7 @@ Config = {
     "s2": 0.99,
 
     "min_permutations": 1,
-    "max_permutations": 100,
+    "max_permutations": 30,
 
     "shingle_size": 3
 }
