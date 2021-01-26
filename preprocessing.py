@@ -15,9 +15,6 @@ def preprocess(df, filename):
     df['article'] = df['article'].map(
         lambda x: re.sub(r'[,!.;+-@!%^&*)(_\\\'\"“”’—]', '', str(x)))  # remove special characters
 
-    print("Removing excess white space")
-    df['article'] = df['article'].map(lambda x: re.sub(r'\W+', ' ', str(x)))  # remove excess white spaces
-
     print("Removing single letters")
     df['article'] = df['article'].map(
         lambda x: re.sub('(\\b[A-Za-z] \\b|\\b [A-Za-z]\\b)', '', str(x)))  # remove single letters
@@ -25,6 +22,9 @@ def preprocess(df, filename):
     print("Removing numbers")
     df['article'] = df['article'].map(
         lambda x: re.sub('([1-9])', '', str(x)))  # remove numbers
+
+    print("Removing excess white space")
+    df['article'] = df['article'].map(lambda x: re.sub(r'\W+', ' ', str(x)))  # remove excess white spaces
 
     # p = inflect.engine()
     #
