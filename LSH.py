@@ -42,7 +42,7 @@ def LSH_sig_matrix(signature_matrix: list, threshhold: float):
     # Initialize variables
     fullist = []
     exceed_list = []
-    signature_matrix = transpose(signature_matrix)  # TODO cleanup?
+    signature_matrix = transpose(signature_matrix)
 
     # loop over every pair of signatures
     for i in range(len(signature_matrix)):
