@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     jaccard(file, config)
 
-    d2 = np.arange(0.65, 0.9+1e-2, step=0.05)
+    d2 = np.arange(0.7, 0.9+1e-2, step=0.05)
     itter = [4, 7, 8, 9, 12, 15, 18, 24, 200]
     # d2 = [0.7]
     # itter = [24]

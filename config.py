@@ -14,6 +14,6 @@ Config = {
 
     "shingle_size": 3,
 
-    "export": True,
+    "export": False,
     "export_filename": "results.csv"
 }
