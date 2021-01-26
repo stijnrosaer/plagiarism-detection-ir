@@ -16,13 +16,13 @@ def lsh(filename, config):
 
     iterations, bands, rows = get_ideal_bands(config["d1"], config["d2"], config["p1"], config["p2"],
                                               config["min_permutations"], config["max_permutations"])
-    print(iterations, bands, rows)
+    print(f'bands: {bands}, rows: {rows}')
     print("False postive chance at", config["d1"], ":", calc_prob_sim(config["d1"], bands, rows))
     print("False negative chance at", config["d2"], ":", 1 - calc_prob_sim(config["d2"], bands, rows))
 
     signature_matrix = build_signature_matrix(df, iterations, config["shingle_size"], config["DEBUG"])
 
-    print("generated signature matrix")
+    # print("generated signature matrix")
     # https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134
 
     band_val = use_bands(signature_matrix, bands)
@@ -35,13 +35,18 @@ if __name__ == '__main__':
     file = "preprocess-news_articles_small.csv"
     config = Config
 
+    jaccard(file, config)
+
     d2 = np.arange(0.65, 0.9+1e-2, step=0.05)
     itter = [4, 7, 8, 9, 12, 15, 18, 24, 200]
+    # d2 = [0.7]
+    # itter = [24]
 
     for j in itter:
         for i in d2:
+            i = np.round(i, 2)
             config["d2"] = i
-            config["d1"] = i - 0.05
+            config["d1"] = np.round(i - 0.05, 2)
             config["min_permutations"] = j
             config["max_permutations"] = j
 
