@@ -2,6 +2,8 @@ import pandas as pd
 import itertools
 import os
 import numpy as np
+import matplotlib.scale
+import math
 import matplotlib.pyplot as plt
 from nltk import ngrams
 from config import Config
@@ -63,7 +65,14 @@ def plot(df):
     t = df.groupby(pd.cut(df["score"], np.arange(0, 1 + 1e-10, 0.1))).size()
 
     t.plot(kind="bar")
-    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.yscale("log")
+
+    for i, v in enumerate(t):
+        plt.text(i -0.25,
+                 v / (math.log(t[i] + 1)*1e-50 + 1) + 15,
+                  t[i],
+                  fontsize=10)
+    plt.ylabel("Amount of documents (log)")
     plt.show()
 
     if DEBUG:
