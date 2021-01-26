@@ -1,4 +1,5 @@
 import numpy as np
+from config import Config
 
 
 def transpose(m):
@@ -139,9 +140,8 @@ def get_ideal_bands(d1: float, d2: float, p1: float, p2: float, eps=0.01, printi
     :param eps: max error between p1 and calculated p1 and between p2 and calc p2
     :return: (nr_bands, nr_rows)
     """
-    # TODO Config vars
-    min_iterations = 1
-    max_iterations = 500
+    min_iterations = Config["min_permutations"]
+    max_iterations = Config["max_permutations"]
 
     bands_best, rows_best, iter_best = 0, 0, 0
     error_best = float('inf')
@@ -154,7 +154,7 @@ def get_ideal_bands(d1: float, d2: float, p1: float, p2: float, eps=0.01, printi
             # filter bands that cannot divide perfectly
             if nr_iters % bands == 0 or bands == 1:
                 # compute nr of rows per band
-                rows = nr_iters/bands
+                rows = nr_iters//bands
                 # caclulate the probability of generating a candidate pair with sim d1 and d2
                 p1_calc = calc_prob_sim(d1, bands, rows)
                 p2_calc = calc_prob_sim(d2, bands, rows)
