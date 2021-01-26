@@ -5,6 +5,13 @@ from config import Config
 
 from LSH import *
 
+
+def export_to_file(candidate_pairs: list, filename: str):
+    with open(filename, 'w') as file:
+        for pair in candidate_pairs:
+            file.write(f"({pair[0]},{pair[1]})\n")
+
+
 def jaccard(filename, config):
     df = pd.read_csv(filename)
 
@@ -26,6 +33,9 @@ def lsh(filename, config):
     # https://towardsdatascience.com/understanding-locality-sensitive-hashing-49f6d1f6134
 
     band_val = use_bands(signature_matrix, bands)
+    if "export" in config and config["export"] and "export_filename" in config:
+        export_to_file(band_val, config["export_filename"])
+
     print(band_val)
     val = LSH_sig_matrix(signature_matrix, config["d2"])
     print(val[1])
