@@ -10,7 +10,7 @@ OVERWRITE = Config["Jacard_OVERWRITE"]  # used to state that the index of jacard
 DEBUG = Config["DEBUG"]  # used to print extra info
 
 
-def jaccard_index(query, document):
+def jaccard_index(query: list, document: list) -> float:
     """
     calculate the jacard value between the 2 documents according to the algorithm
     :param query: the first document

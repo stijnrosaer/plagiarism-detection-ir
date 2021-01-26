@@ -131,17 +131,18 @@ def calc_prob_sim(sim: float, bands: int, rows: int) -> float:
     return prob
 
 
-def get_ideal_bands(d1: float, d2: float, p1: float, p2: float, eps=0.01, printing=False) -> tuple:
+def get_ideal_bands(d1: float, d2: float, p1: float, p2: float, min_iterations: int, max_iterations: int, eps=0.01, printing=False) -> tuple:
     """
     :param d1:  upper bound of false positives
     :param d2:  lower bound on false negatives
     :param p1:  max chance for false positive before d1
-    :param p2:  max chance for false negeative after d2
+    :param p2:  max chance for false negative after d2
+    :param min_iterations: 
+    :param max_iterations: 
     :param eps: max error between p1 and calculated p1 and between p2 and calc p2
     :return: (nr_bands, nr_rows)
     """
-    min_iterations = Config["min_permutations"]
-    max_iterations = Config["max_permutations"]
+
 
     bands_best, rows_best, iter_best = 0, 0, 0
     error_best = float('inf')

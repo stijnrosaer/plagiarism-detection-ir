@@ -10,7 +10,7 @@ df = pd.read_csv(filename)
 df2 = jaccard_df(df, filename, Config["shingle_size"])
 plot(df2)
 
-iterations, bands, rows = get_ideal_bands(Config["d1"], Config["d2"], Config["p1"], Config["p2"])
+iterations, bands, rows = get_ideal_bands(Config["d1"], Config["d2"], Config["p1"], Config["p2"], Config["min_permutations"], Config["max_permutations"])
 print(iterations, bands, rows)
 print("False postive chance at", Config["d1"], ":", calc_prob_sim(Config["d1"], bands, rows))
 print("False negative chance at", Config["d2"], ":", 1 - calc_prob_sim(Config["d2"], bands, rows))
