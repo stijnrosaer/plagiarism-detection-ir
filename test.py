@@ -75,6 +75,17 @@ class TestLSH(unittest.TestCase):
         result = use_bands(signature_matrix, 5)
         self.assertListEqual(result, [(1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 4), (3, 5), (4, 5)])
 
+    def test_no_candidate_pair(self):
+        signature_matrix = [
+            [(1,1), (2,2), (3,3), (4,4), (5,5)],
+            [(1,1), (2,2), (3,3), (4,4), (5,5)],
+            [(1,1), (2,2), (3,3), (4,4), (5,5)],
+            [(1,1), (2,2), (3,3), (4,4), (5,5)],
+            [(1,1), (2,2), (3,3), (4,4), (5,5)]
+        ]
+        result = use_bands(signature_matrix, 5)
+        self.assertListEqual(result, [])
+
 
 if __name__ == "__main__":
     unittest.main()
