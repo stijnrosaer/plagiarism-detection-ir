@@ -8,7 +8,7 @@ def transpose(m):
     :param m: the matrix to transpose
     :return: the transposed matrix
     """
-    trans = [[m[j][i][1] for j in range(len(m))] for i in range(len(m[0]))]
+    trans = [[m[j][i] for j in range(len(m))] for i in range(len(m[0]))]
     return trans
 
 
@@ -49,7 +49,7 @@ def LSH_sig_matrix(signature_matrix: list, threshhold: float):
         for j in range(i+1, len(signature_matrix), 1):
             # Calculate their similarity
             similarity = calc_signature_similarity(
-                signature_matrix[i], signature_matrix[j])
+                [t[1] for t in signature_matrix[i]], [t[1] for t in signature_matrix[j]])
 
             # Append to list(s)
             fulval = ((i, j), similarity)
@@ -84,8 +84,10 @@ def use_bands(signature_matrix: list, nr_bands: int) -> list:
 
             # loop over all corresponding partial signatures in these two bands
             for k in range(len(bands[i])):
-                if list(bands[i][k]) == list(bands[j][k]):  # check in same bucket
-                    candidate_pairs.append((i, j))
+                r = [t[1] for t in bands[i][k]]
+                s = [t[1] for t in bands[j][k]]
+                if r == s:  # check in same bucket
+                    candidate_pairs.append((bands[i][k][0][0], bands[j][k][0][0]))
                     break       # stop search if in same bucket because this pair is already a candidate
     return candidate_pairs
 

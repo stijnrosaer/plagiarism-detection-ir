@@ -47,19 +47,22 @@ if __name__ == '__main__':
 
     jaccard(file, config)
 
-    d2 = np.arange(0.7, 0.9+1e-2, step=0.05)
-    itter = [4, 7, 8, 9, 12, 15, 18, 24, 200]
+
     # d2 = [0.7]
     # itter = [24]
+    lsh(filename=file, config=config)
 
-    for j in itter:
-        for i in d2:
-            i = np.round(i, 2)
-            config["d2"] = i
-            config["d1"] = np.round(i - 0.05, 2)
-            config["min_permutations"] = j
-            config["max_permutations"] = j
-
-            print('-'*20)
-            print(f"d2: {i}, permutation: {j}")
-            lsh(filename=file, config=config)
+    # d2 = np.arange(0.7, 0.9 + 1e-2, step=0.05)
+    # itter = [4, 7, 8, 9, 12, 15, 18, 24, 200]
+    #
+    # for j in itter:
+    #     for i in d2:
+    #         i = np.round(i, 2)
+    #         config["d2"] = i
+    #         config["d1"] = np.round(i - 0.05, 2)
+    #         config["min_permutations"] = j
+    #         config["max_permutations"] = j
+    #
+    #         print('-'*20)
+    #         print(f"d2: {i}, permutation: {j}")
+    #         lsh(filename=file, config=config)

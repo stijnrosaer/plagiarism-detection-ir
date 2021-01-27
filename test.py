@@ -106,6 +106,18 @@ class TestLSH(unittest.TestCase):
 
         result = use_bands(signature_matrix, 1)
         self.assertListEqual(result, [])
+
+    def test_two_bands(self):
+        # one minhash value is equal
+        # candidate pair depends on size of bands
+        signature_matrix = [
+            [(1,1), (2,1), (3,3), (4,4)],
+            [(1,1), (2,1), (3,3), (4,3)],
+            [(1,1), (2,2), (3,3), (4,3)],
+            [(1,1), (2,2), (3,3), (4,3)]
+        ]
+        result = use_bands(signature_matrix, 2)
+        self.assertListEqual(result, [(1,2), (3,4)])
         
 
 
