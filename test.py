@@ -62,5 +62,19 @@ class TestIdealIterRowsBands(unittest.TestCase):
         self.assertAlmostEqual(calc_prob_sim(0.8, bands, rows), 0.9996, 4)
 
 
+class TestLSH(unittest.TestCase):
+
+    def test_all_candidate_pairs(self):
+        signature_matrix = [
+            [(1,1), (2,1), (3,1), (4,1), (5,1)],
+            [(1,1), (2,1), (3,1), (4,1), (5,1)],
+            [(1,1), (2,1), (3,1), (4,1), (5,1)],
+            [(1,1), (2,1), (3,1), (4,1), (5,1)],
+            [(1,1), (2,1), (3,1), (4,1), (5,1)]
+        ]
+        result = use_bands(signature_matrix, 5)
+        self.assertListEqual(result, [(1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 4), (3, 5), (4, 5)])
+
+
 if __name__ == "__main__":
     unittest.main()
