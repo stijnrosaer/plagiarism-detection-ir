@@ -9,7 +9,7 @@ from LSH import *
 def export_to_file(candidate_pairs: list, filename: str):
     with open(filename, 'w') as file:
         for pair in candidate_pairs:
-            file.write(f"({pair[0]},{pair[1]})\n")
+            file.write(f"{pair[0]},{pair[1]}\n")
 
 
 def jaccard(filename, config):
